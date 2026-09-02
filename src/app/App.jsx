@@ -5,11 +5,13 @@ import HomePage from '../pages/HomePage.jsx'
 
 function App() {
   return (
-    <Routes>
-      <Route element={<AppLayout />}>
-        <Route path="/" element={<HomePage />} />
-      </Route>
-    </Routes>
+    <div className="app">
+      <Routes>
+        <Route element={<AppLayout />}>
+          <Route path="/" element={<HomePage />} />
+        </Route>
+      </Routes>
+    </div>
   )
 }
 
