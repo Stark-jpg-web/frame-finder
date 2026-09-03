@@ -64,13 +64,13 @@ This section is the continuity contract for any new AI mentor who receives this 
 ### Current Project Snapshot — Update After Each Completed Task
 
 - **Project root:** `C:\Users\PC\Desktop\HTML\frame-finder` (lowercase `frame-finder`; do not mix it with the separate `FrameFinder` folder that holds this roadmap).
-- **Completed Foundation micro-tasks:** `F01`–`F45`.
-- **Next Foundation micro-task:** `F46` — implement `fetchPopular` in `src/services/tmdb/movieApi.js` and `usePopular` in `src/hooks/useMovies.js`.
+- **Completed Foundation micro-tasks:** `F01`–`F46`.
+- **Next Foundation micro-task:** `F47` — create `src/components/ui/RatingBadge.jsx` with semantic score threshold color coding.
 - **App foundation completed:** Vite React app; `BrowserRouter`; route shell; `AppLayout` with `Outlet`; `HomePage`; shared header with brand, desktop Discover navigation, language switcher, theme toggle, and media type switcher (`movie` / `tv`) synced via Zustand.
-- **Localization completed:** `react-i18next`; English and Arabic `common.json`; saved language; document `lang` and `dir` updates; translated accessibility labels.
+- **Localization completed:** `react-i18next`; English and Arabic `common.json`; saved language; document `lang` and `dir` updates; translated accessibility labels; localized TMDB query caching.
 - **Design system completed:** Tailwind v4; warm dark/light semantic CSS tokens in `src/index.css`; app-level spacing cleanup; visual direction documented above.
 - **Persistent client settings completed:** Zustand `useStore`; saved dark/light theme; `mediaType` isolation.
-- **TMDB setup completed:** local `.env`, committed `.env.example`, `src/services/tmdb/movieApi.js` with `apiFetch`, error handling with status codes, isolated `fetchTrending`, and `fetchTopRated`.
+- **TMDB setup completed:** local `.env`, committed `.env.example`, `src/services/tmdb/movieApi.js` with `apiFetch`, error handling with status codes, and isolated `fetchTrending`, `fetchTopRated`, and `fetchPopular` with `language` support.
 - **React Query completed so far:** package installed; `src/lib/queryClient.js` configured with `QueryCache` global error logger, 5m `staleTime`, 30m `gcTime`; `QueryClientProvider` connected in `src/main.jsx`.
 
 ### First Response From a New Mentor
