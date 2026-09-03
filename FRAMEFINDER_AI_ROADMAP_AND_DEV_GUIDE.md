@@ -15,6 +15,7 @@
 > 6. **Coach on Clean Architecture:** Reinforce the separation between Server State (React Query), Client State (Zustand), URL State (React Router), and Local UI State (useState).
 > 7. **Review User Code Rigorously:** When the user shares code, evaluate it for null safety, performance (unnecessary re-renders, layout shifts), accessibility (ARIA labels, keyboard navigation), and edge cases (404s, slow networks, offline fallback).
 > 8. **Give Concrete Design Measurements for Every UI Task:** Before the user implements a visual task, provide the semantic color tokens to use (for example, `bg-surface` rather than a raw hex value) and the exact spacing, sizing, radius, and typography values needed. Explain briefly what each value controls, and apply the same tokens and measurements consistently in FrameFinder from the first component onward.
+> 9. **Explain Every Single Step Deeply:** For each task and code block, provide an exhaustive, step-by-step breakdown. Never provide code without explaining what each line does, why it is needed, how data flows through it, and the underlying React/library mechanics. Treat every step as an in-depth learning milestone.
 
 ---
 
@@ -40,6 +41,41 @@ The mentor must also number every smaller, hands-on teaching step in the convers
 - Completed Foundation micro-tasks: `F01`–`F27` (project scaffold, app structure, i18n/RTL setup, routing/layout foundation, Tailwind and design tokens, language control, and persistent theme foundation).
 - Next Foundation micro-task: `F28`.
 - Each new task response must show its `F` number, exact files, connections, design tokens and measurements when visual, and a verification check.
+
+---
+
+## Mentor Handoff and Continuity Protocol
+
+This section is the continuity contract for any new AI mentor who receives this file. The user is learning by implementing the project personally; the mentor guides, explains, reviews, and verifies, but does not dump a complete application or skip ahead.
+
+### Required Teaching Style
+
+1. Begin by reading this entire document and the actual current project files before proposing a new task. Do not assume the repository still matches this log.
+2. Continue from the next unfinished `F` micro-task. Never restart the curriculum, renumber completed work, or combine several independent changes into one task.
+3. Give **one self-contained micro-task at a time**. Wait for the user's `done`, question, pasted code, or error before giving the next one.
+4. For every task, state: the `F` number, exact path(s), why each file belongs there, incoming/outgoing imports, the smallest code change, and a concrete verification step.
+5. For a visual task, also state the semantic colors, exact spacing/sizing/radius/typography values, and RTL considerations. Use existing semantic tokens; never introduce random hex values in JSX.
+6. Whenever a visible string or control is introduced, include English and Arabic translation keys and confirm RTL behavior in the same feature slice. Whenever server data is introduced, include loading, error, and empty-state planning before the feature expands.
+7. Explain unfamiliar React concepts in plain language when they first appear. If the user asks about a line of code, answer that question first; do not advance the task until they say `next`.
+8. Review pasted user code for syntax, imports, accessibility, state ownership, RTL, responsive behavior, error cases, and unnecessary re-renders. Explain corrections clearly rather than silently replacing their work.
+9. Do not ask the user to expose or paste tokens, passwords, or API keys. `.env` is local and ignored; `.env.example` is the safe committed template.
+10. Break down every single step with deep explanations. Never supply code without explaining what each line accomplishes, how state and data flow between layers, and the architectural reasons behind each decision.
+
+### Current Project Snapshot — Update After Each Completed Task
+
+- **Project root:** `C:\Users\PC\Desktop\HTML\frame-finder` (lowercase `frame-finder`; do not mix it with the separate `FrameFinder` folder that holds this roadmap).
+- **Completed Foundation micro-tasks:** `F01`–`F45`.
+- **Next Foundation micro-task:** `F46` — implement `fetchPopular` in `src/services/tmdb/movieApi.js` and `usePopular` in `src/hooks/useMovies.js`.
+- **App foundation completed:** Vite React app; `BrowserRouter`; route shell; `AppLayout` with `Outlet`; `HomePage`; shared header with brand, desktop Discover navigation, language switcher, theme toggle, and media type switcher (`movie` / `tv`) synced via Zustand.
+- **Localization completed:** `react-i18next`; English and Arabic `common.json`; saved language; document `lang` and `dir` updates; translated accessibility labels.
+- **Design system completed:** Tailwind v4; warm dark/light semantic CSS tokens in `src/index.css`; app-level spacing cleanup; visual direction documented above.
+- **Persistent client settings completed:** Zustand `useStore`; saved dark/light theme; `mediaType` isolation.
+- **TMDB setup completed:** local `.env`, committed `.env.example`, `src/services/tmdb/movieApi.js` with `apiFetch`, error handling with status codes, isolated `fetchTrending`, and `fetchTopRated`.
+- **React Query completed so far:** package installed; `src/lib/queryClient.js` configured with `QueryCache` global error logger, 5m `staleTime`, 30m `gcTime`; `QueryClientProvider` connected in `src/main.jsx`.
+
+### First Response From a New Mentor
+
+The first response should briefly confirm the snapshot against the current files, then continue with `F41` only if it remains unfinished. It must not re-teach completed setup, create unrelated files, introduce additional TMDB endpoints, or make the user repeat completed work.
 
 ---
 
@@ -280,28 +316,46 @@ export const getImageUrl = (path, size = TMDB_IMAGE_SIZES.POSTER_CARD) => {
 
 ---
 
-## Endpoint Schemas & Response Structures
+## Endpoint Schemas & Response Structures (Isolated Movies & TV Shows)
 
-### 1. Trending Movies (`GET /trending/movie/week`)
-- **Query Params**: `language=en-US`
-- **Used by**: `HomePage` (Hero Banner & Trending Carousel)
+FrameFinder cleanly separates **Movies** and **TV Shows** rather than mixing them into an unorganized stream. Every service function accepts a media type parameter (`type: 'movie' | 'tv'`).
 
-### 2. Popular & Top Rated (`GET /movie/popular`, `GET /movie/top_rated`)
-- **Query Params**: `page=1`, `language=en-US`
+### 1. Trending Feed (`GET /trending/{type}/week`)
+- **Parameters**: `type = 'movie' | 'tv'`, `time_window = 'week'`
+- **Used by**: `HomePage` (Hero Spotlight & Dedicated Trending Rows)
+- **Movie vs TV Fields**:
+  - Movies: `title`, `original_title`, `release_date`
+  - TV Shows: `name`, `original_name`, `first_air_date`
+
+### 2. Top Rated & Popular (`GET /{type}/top_rated`, `GET /{type}/popular`)
+- **Parameters**: `type = 'movie' | 'tv'`, `page = 1`
 - **Used by**: `HomePage` Category Carousels
 
-### 3. Movie Search (`GET /search/movie`)
-- **Query Params**: `query={searchTerm}`, `page=1`, `include_adult=false`
-- **Used by**: `SearchPage` live debounced search
+### 3. Media Search (`GET /search/{type}`)
+- **Parameters**: `type = 'movie' | 'tv' | 'multi'`, `query = {searchTerm}`
+- **Used by**: `SearchPage` with real-time media type tabs
 
-### 4. Comprehensive Movie Details (`GET /movie/{id}`)
+### 4. Deep-Dive Details (`GET /{type}/{id}`)
 - **Superpower Parameter**: `append_to_response=videos,credits,recommendations`
-- **Used by**: `MovieDetailsPage` (fetches synopsis, YouTube trailers, cast/crew, and similar movies in **1 network roundtrip**)
+- **Used by**: `MovieDetailsPage` / `MediaDetailsPage`
 
-#### Complete Response Shape:
+#### Unified Media Schema:
 ```typescript
-interface MovieDetails {
+interface MediaItem {
   id: number;
+  media_type?: 'movie' | 'tv';
+  title?: string;             // Present on movies
+  name?: string;              // Present on TV shows
+  release_date?: string;      // "2024-03-01" (Movies)
+  first_air_date?: string;    // "2024-03-01" (TV Shows)
+  overview: string;
+  poster_path: string | null;
+  backdrop_path: string | null;
+  vote_average: number;
+  vote_count: number;
+  genre_ids: number[];
+}
+```
   title: string;
   tagline: string;
   overview: string;
@@ -364,19 +418,19 @@ Replace the mock data in `src/features/movies/movieApi.js` with live TMDB API ca
    - Attaches `Authorization: Bearer <TOKEN>` header.
    - Appends search params to the URL.
    - Checks `response.ok` and throws clear errors for 401, 404, or 429 status codes.
-3. **Implement the 6 Core Service Functions**:
-   - `fetchTrendingMovies()` → `/trending/movie/week`
-   - `fetchTopRatedMovies()` → `/movie/top_rated`
-   - `fetchPopularMovies()` → `/movie/popular`
-   - `searchMovies(query)` → `/search/movie?query=${encodeURIComponent(query)}`
-   - `fetchMovieDetails(id)` → `/movie/${id}?append_to_response=videos,credits,recommendations`
-   - `fetchGenres()` → `/genre/movie/list`
+3. **Implement the Core Service Functions (Supporting Isolated Movies & TV Shows)**:
+   - `fetchTrending(type = 'movie', timeWindow = 'week')` → `/trending/${type}/${timeWindow}`
+   - `fetchTopRated(type = 'movie')` → `/${type}/top_rated`
+   - `fetchPopular(type = 'movie')` → `/${type}/popular`
+   - `searchMedia(query, type = 'movie')` → `/search/${type}?query=${encodeURIComponent(query)}`
+   - `fetchMediaDetails(type = 'movie', id)` → `/${type}/${id}?append_to_response=videos,credits,recommendations`
+   - `fetchGenres(type = 'movie')` → `/genre/${type}/list`
 4. **Implement Fallback**: If token is missing or network fails, fall back to `src/data/movies.json`.
 
 ### 🧪 Stage Testing & Verification Checklist
 - [ ] Open DevTools → Network Tab.
 - [ ] Reload Home page: Verify real requests to `api.themoviedb.org`.
-- [ ] Verify HTTP 200 responses with real movie titles and TMDB poster paths.
+- [ ] Verify HTTP 200 responses with real titles (`title` for movies, `name` for TV shows) and TMDB poster paths.
 - [ ] Test error fallback: Temporarily invalidate the token in `.env` → verify the app falls back to `movies.json` without crashing.
 
 ---
@@ -384,29 +438,33 @@ Replace the mock data in `src/features/movies/movieApi.js` with live TMDB API ca
 ## Sprint 2: Server State & TanStack Query Caching
 
 ### 🎯 Goal
-Verify and configure TanStack React Query in `src/hooks/useMovies.js` and `src/app/queryClient.js` to ensure optimal caching and zero duplicate network requests.
+Configure TanStack React Query in `src/hooks/useMovies.js` (or `useMedia.js`) with isolated query keys for Movies and TV Shows, and verify global caching in `src/lib/queryClient.js`.
 
 ### 📁 Files to Touch
 - `src/hooks/useMovies.js`
-- `src/app/queryClient.js`
+- `src/lib/queryClient.js`
 
 ### 📝 Step-by-Step Tasks for User
-1. **Review Query Key Factory Pattern**:
+1. **Review Media Query Key Factory Pattern**:
    ```javascript
-   export const movieKeys = {
-     all: ['movies'],
-     trending: () => [...movieKeys.all, 'trending'],
-     topRated: () => [...movieKeys.all, 'top-rated'],
-     popular: () => [...movieKeys.all, 'popular'],
-     search: (query) => [...movieKeys.all, 'search', query],
-     detail: (id) => [...movieKeys.all, 'detail', id],
-     genres: () => ['genres'],
+   export const mediaKeys = {
+     all: ['media'],
+     type: (type) => [...mediaKeys.all, type],
+     trending: (type = 'movie') => [...mediaKeys.type(type), 'trending'],
+     topRated: (type = 'movie') => [...mediaKeys.type(type), 'top-rated'],
+     popular: (type = 'movie') => [...mediaKeys.type(type), 'popular'],
+     search: (type = 'movie', query) => [...mediaKeys.type(type), 'search', query],
+     detail: (type = 'movie', id) => [...mediaKeys.type(type), 'detail', id],
+     genres: (type = 'movie') => [...mediaKeys.type(type), 'genres'],
    };
    ```
 2. **Verify Query Options in `useMovies.js`**:
-   - `useSearchMovies(query)` must have `enabled: Boolean(query && query.trim().length >= 1)`.
-   - `useMovieDetails(id)` must have `enabled: Boolean(id)`.
-   - `useGenres()` should have `staleTime: 24 * 60 * 60 * 1000` (24 hours).
+   - `useTrending(type = 'movie')`: Fetches isolated trending list by type.
+   - `useTopRated(type = 'movie')`: Fetches isolated top-rated list by type.
+   - `usePopular(type = 'movie')`: Fetches isolated popular list by type.
+   - `useSearchMedia(query, type = 'movie')` must have `enabled: Boolean(query && query.trim().length >= 1)`.
+   - `useMediaDetails(type, id)` must have `enabled: Boolean(id)`.
+   - `useGenres(type)` should have `staleTime: 24 * 60 * 60 * 1000` (24 hours).
 3. **Verify Global Defaults in `queryClient.js`**:
    - `staleTime: 5 * 60 * 1000` (5 minutes).
    - `gcTime: 30 * 60 * 1000` (30 minutes garbage collection).
@@ -481,19 +539,23 @@ Build the flagship Discovery experience on `src/pages/HomePage.jsx` with a Hero 
 - `src/components/movies/HeroBanner.jsx` (or embedded Hero section)
 
 ### 📝 Step-by-Step Tasks for User
-1. **Dynamic Hero Banner**:
-   - Uses the #1 trending movie backdrop (`w1280`).
+1. **Segmented Media Switcher (`[ Movies | TV Shows ]`)**:
+   - Modern pill toggle at the top of the Discovery hub (`mediaType: 'movie' | 'tv'`).
+   - Smoothly switches the Hero Banner and all 3 carousels between Movies and TV Shows.
+2. **Dynamic Hero Spotlight**:
+   - Uses the #1 trending media item backdrop (`w1280`).
    - Radial dark gradient scrim overlay.
-   - Title, overview, rating badge, and quick Favorite/Watchlist buttons.
-2. **Category Carousels**:
-   - "Trending This Week", "Top Rated", and "Popular".
+   - Title/Name, overview, rating badge, and quick Favorite/Watchlist buttons.
+3. **Isolated Category Carousels**:
+   - "Trending This Week", "Top Rated", and "Popular" (for the selected media type).
    - Left/Right chevron scroll buttons with smooth horizontal snap-scrolling.
-   - Renders 6 skeleton cards while `isLoading` is true.
+   - Renders skeleton cards while `isLoading` is true.
 
 ### 🧪 Stage Testing & Verification Checklist
-- [ ] Home page renders live TMDB movies and backdrops.
+- [ ] Home page renders live TMDB movies or TV shows based on the active media pill.
+- [ ] Switching between Movies and TV Shows swaps carousels instantly from cache.
 - [ ] Chevron buttons scroll carousels smoothly left and right.
-- [ ] Clicking Favorite ❤️ on a card updates state immediately without opening `/movie/:id` (`e.stopPropagation()` check).
+- [ ] Clicking Favorite ❤️ on a card updates state immediately without opening detail page (`e.stopPropagation()` check).
 
 ---
 
