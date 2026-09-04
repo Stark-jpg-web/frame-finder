@@ -65,19 +65,19 @@ This section is the continuity contract for any new AI mentor who receives this 
 ### Current Project Snapshot — Update After Each Completed Task
 
 - **Project root:** `C:\Users\PC\Desktop\HTML\frame-finder` (lowercase `frame-finder`; do not mix it with the separate `FrameFinder` folder that holds this roadmap).
-- **Completed Foundation micro-tasks:** `F01`–`F48`.
-- **Next Foundation micro-task:** `F49` — Refactor `MediaCard.jsx` into an optimized portrait poster card (`aspect-[2/3]`) tailored for horizontal carousels with hover elevation, zero CLS, localized metadata, and rating badge.
+- **Completed Foundation micro-tasks:** `F01`–`F51`.
+- **Next Foundation micro-task:** `F52` — Implement the 4th primary carousel "New Releases" (`/movie/now_playing`, `/tv/on_the_air`) and initial curated Genre carousels on the Discovery Home screen.
 - **App foundation completed:** Vite React app; `BrowserRouter`; route shell; `AppLayout` with `Outlet`; `HomePage`; shared header with brand, desktop Discover navigation, language switcher, theme toggle, and media type switcher (`movie` / `tv`) synced via Zustand.
-- **Localization completed:** `react-i18next`; English and Arabic `common.json`; saved language; document `lang` and `dir` updates; translated accessibility labels; localized TMDB query caching.
-- **Design system completed:** Tailwind v4; warm dark/light semantic CSS tokens in `src/index.css`; app-level spacing cleanup; visual direction documented above.
+- **Localization completed:** `react-i18next`; English and Arabic `common.json`; saved language; document `lang` and `dir` updates; translated accessibility labels; localized TMDB query caching; automatic English fallback for missing Arabic overviews and titles.
+- **Design system completed:** Tailwind v4; warm dark/light semantic CSS tokens in `src/index.css`; Cairo font integration; app-level spacing cleanup; visual direction documented above.
 - **Persistent client settings completed:** Zustand `src/store/useStore.js`; saved dark/light theme; `mediaType` isolation.
-- **TMDB setup completed:** local `.env`, committed `.env.example`, `src/services/tmdb/movieApi.js` with `apiFetch`, error handling with status codes, and isolated `fetchTrending`, `fetchTopRated`, and `fetchPopular` with `language` support.
+- **TMDB setup completed:** local `.env`, committed `.env.example`, `src/services/tmdb/movieApi.js` with `apiFetch`, error handling with status codes, `fetchWithFallBack` for bilingual resilience, and isolated `fetchTrending`, `fetchTopRated`, and `fetchPopular` with `language` support.
 - **React Query completed so far:** package installed; `src/app/queryClient.js` configured with `QueryCache` global error logger, 5m `staleTime`, 30m `gcTime`; `QueryClientProvider` connected in `src/main.jsx`.
-- **UI Components completed so far:** `RatingBadge.jsx` (threshold color-coded score badge), initial `MediaCard.jsx` and `MediaCardSkeleton.jsx`.
+- **UI Components completed so far:** `RatingBadge.jsx`, portrait `MediaCard.jsx` (`aspect-[2/3]`), `MediaCardSkeleton.jsx`, horizontal snap-scrolling `MediaCarousel.jsx`, and dynamic `HeroBanner.jsx`.
 
 ### First Response From a New Mentor
 
-The first response should briefly confirm the snapshot against the current files, then continue with `F49`. It must not re-teach completed setup, create unrelated files, or make the user repeat completed work.
+The first response should briefly confirm the snapshot against the current files, then continue with `F52`. It must not re-teach completed setup, create unrelated files, or make the user repeat completed work.
 
 ---
 
