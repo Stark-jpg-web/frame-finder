@@ -6,8 +6,9 @@ import EmptyState from '../components/library/EmptyState.jsx'
 import CollectionFilterToolbar from '../components/library/CollectionFilterToolbar.jsx'
 import useStore from '../store/useStore.js'
 import { CURATED_GENRES } from '../utils/constants.js'
-import { FaHeart } from 'react-icons/fa'
-function FavoritesPage() {
+import { CiCircleList } from 'react-icons/ci'
+
+function WatchlistPage() {
   const { t } = useTranslation()
 
   const [mediaType, setMediaType] = useState('all')
@@ -15,12 +16,12 @@ function FavoritesPage() {
   const [sortBy, setSortBy] = useState('date_desc')
   const [sortByGenre, setSortByGenre] = useState('all')
 
-  const favorites = useStore((state) => state.favorites)
-  const allFavoritesItems = Object.values(favorites || {})
+  const watchlist = useStore((state) => state.watchlist)
+  const allWatchlistItems = Object.values(watchlist || {})
 
-  const filteredFavorites = useMemo(() => {
+  const filteredWatchlist = useMemo(() => {
     // 1. Convert dictionary to array
-    let list = Object.values(favorites || {})
+    let list = Object.values(watchlist || {})
     // 2. Filter by Media Type ('all' | 'movie' | 'tv')
     if (mediaType !== 'all') {
       list = list.filter((item) => item.media_type === mediaType)
@@ -77,15 +78,16 @@ function FavoritesPage() {
           return (b.addedAt || 0) - (a.addedAt || 0)
       }
     })
-  }, [favorites, mediaType, searchQuery, sortBy, sortByGenre])
-  const isFavoritesEmpty = allFavoritesItems.length === 0
-  const isFilteredEmpty = !isFavoritesEmpty && filteredFavorites.length === 0
+  }, [watchlist, mediaType, searchQuery, sortBy, sortByGenre])
+  const isWatchlistEmpty = allWatchlistItems.length === 0
+  const isFilteredEmpty = !isWatchlistEmpty && filteredWatchlist.length === 0
 
   return (
     <div className="flex flex-col gap-4">
       <div className="section-header">
-        <h2 className="flex items-center gap-2 text-2xl sm:text-3xl font-black tracking-tight text-foreground">
-          {t('favorites.title')} <FaHeart className="text-red-500" />
+        <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-foreground flex items-center gap-2">
+          {t('navigation.watchlist')}{' '}
+          <CiCircleList className="text-3xl text-primary" />
         </h2>
       </div>
 
@@ -100,27 +102,27 @@ function FavoritesPage() {
         onSortByGenreChange={setSortByGenre}
       />
 
-      {isFavoritesEmpty ? (
+      {isWatchlistEmpty ? (
         <EmptyState
-          title={t('favorites.emptyFavoritesTitle')}
-          description={t('favorites.emptyFavoritesDesc')}
+          title={t('watchlist.emptyWatchlistTitle')}
+          description={t('watchlist.emptyWatchlistDesc')}
           icon={<ImLibrary className="text-6xl" />}
-          actionLabel={t('favorites.exploreDiscover')}
+          actionLabel={t('watchlist.exploreDiscover')}
           actionTo="/"
         />
       ) : isFilteredEmpty ? (
         <EmptyState
-          title={t('favorites.emptyFilterTitle')}
-          description={t('favorites.emptyFilterDesc')}
+          title={t('watchlist.emptyFilterTitle')}
+          description={t('watchlist.emptyFilterDesc')}
           icon={<ImLibrary className="text-6xl" />}
-          actionLabel={t('favorites.exploreDiscover')}
+          actionLabel={t('watchlist.exploreDiscover')}
           actionTo="/"
         />
       ) : (
-        <MediaGrid items={filteredFavorites} badgeVariant="" />
+        <MediaGrid items={filteredWatchlist} badgeVariant="" />
       )}
     </div>
   )
 }
 
-export default FavoritesPage
+export default WatchlistPage

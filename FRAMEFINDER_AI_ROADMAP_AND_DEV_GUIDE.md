@@ -2,14 +2,15 @@
 
 > **Instructions for the AI Assistant / Mentor reading this file:**  
 > You are acting as an elite Senior React Architect, Tech Lead, and Socratic Mentor. The user is building **FrameFinder** (a cinematic movie discovery and personal tracking web application) from scratch by themselves to master modern frontend engineering and showcase it on their portfolio.
-> 
+>
 > **Your Core Operating Rules:**
+>
 > 1. **Do NOT write all the code for the user.** Guide them milestone by milestone. Explain the architectural "why", give hints, and let the user write the implementation.
-> 2. **Explicit File Organization & Filing Context:** For *every single file* you work on with the user, explicitly explain:
+> 2. **Explicit File Organization & Filing Context:** For _every single file_ you work on with the user, explicitly explain:
 >    - Its exact folder path (`src/...`).
 >    - Why it lives in that folder (folder purpose).
 >    - What files import it and what files it imports (its incoming/outgoing connections).
-> 3. **Break Tasks into Ultra-Granular Micro-Steps:** Never combine multiple distinct operations into one massive task. For example, connecting *one single TMDB endpoint* (e.g. just `fetchTrendingMovies`) is its own standalone task with its own explanation, request/response review, and verification before moving to the next endpoint.
+> 3. **Break Tasks into Ultra-Granular Micro-Steps:** Never combine multiple distinct operations into one massive task. For example, connecting _one single TMDB endpoint_ (e.g. just `fetchTrendingMovies`) is its own standalone task with its own explanation, request/response review, and verification before moving to the next endpoint.
 > 4. **Build Synchronously & Holistically (End-to-End from the Start):** Do NOT postpone cross-cutting concerns (such as translation keys in `en/common.json` & `ar/common.json`, RTL styling, dark/light CSS variables, and error handling) to the end. Whenever introducing any new UI component, string, or feature, wire up its translations (EN & AR) and theming right from the beginning.
 > 5. **Enforce the Stage Testing & Verification Checklist:** At the end of every micro-step and sprint, ensure the user tests and validates their code against the provided unit, integration, and manual checklists before moving forward.
 > 6. **Coach on Clean Architecture:** Reinforce the separation between Server State (React Query), Client State (Zustand), URL State (React Router), and Local UI State (useState).
@@ -24,18 +25,18 @@
 
 This document has **29 planned roadmap tasks** across its 10 sprints. The original numbered lists restart at 1 in each sprint, so use these global roadmap ranges when referring to them:
 
-| Sprint | Global roadmap task numbers | Count |
-| :--- | :--- | :--- |
-| Sprint 1 — TMDB API layer | R01–R04 | 4 |
-| Sprint 2 — React Query caching | R05–R07 | 3 |
-| Sprint 3 — Zustand library state | R08–R09 | 2 |
-| Sprint 4 — UI component library | R10–R12 | 3 |
-| Sprint 5 — Home discovery page | R13–R14 | 2 |
-| Sprint 6 — Search | R15–R17 | 3 |
-| Sprint 7 — Movie details | R18–R21 | 4 |
-| Sprint 8 — Personal library pages | R22–R23 | 2 |
-| Sprint 9 — i18n and RTL audit | R24–R26 | 3 |
-| Sprint 10 — tests and deployment | R27–R29 | 3 |
+| Sprint                            | Global roadmap task numbers | Count |
+| :-------------------------------- | :-------------------------- | :---- |
+| Sprint 1 — TMDB API layer         | R01–R04                     | 4     |
+| Sprint 2 — React Query caching    | R05–R07                     | 3     |
+| Sprint 3 — Zustand library state  | R08–R09                     | 2     |
+| Sprint 4 — UI component library   | R10–R12                     | 3     |
+| Sprint 5 — Home discovery page    | R13–R14                     | 2     |
+| Sprint 6 — Search                 | R15–R17                     | 3     |
+| Sprint 7 — Movie details          | R18–R21                     | 4     |
+| Sprint 8 — Personal library pages | R22–R23                     | 2     |
+| Sprint 9 — i18n and RTL audit     | R24–R26                     | 3     |
+| Sprint 10 — tests and deployment  | R27–R29                     | 3     |
 
 The mentor must also number every smaller, hands-on teaching step in the conversation as `F01`, `F02`, and so on. These **Foundation micro-tasks** are intentionally smaller than the 29 roadmap tasks and may support more than one roadmap task.
 
@@ -119,6 +120,7 @@ The first response should briefly confirm the snapshot against the current files
 **FrameFinder** is a cinematic, dark-themed movie discovery application and personal film journal.
 
 ### Key Capabilities
+
 - 🔍 **Real-Time Search**: Debounced live search with URL synchronization and genre filtering.
 - 🎬 **Cinematic Discovery Hub**:
   - **Dynamic Hero Spotlight**: Top banner spotlighting the #1 trending movie/show with high-res backdrop scrim, quick play/explore, and watchlist actions.
@@ -135,6 +137,7 @@ The first response should briefly confirm the snapshot against the current files
 - 🌙 **Theming**: Smooth Dark/Light mode transitions using CSS variables and TailwindCSS v4.
 
 ### Production Tech Stack
+
 - **Framework**: React 19 + Vite 8
 - **Styling**: TailwindCSS v4 (Design tokens via `@theme inline` & CSS Custom Properties)
 - **Server State / Caching**: TanStack React Query v5
@@ -149,18 +152,18 @@ FrameFinder uses a warm, cinematic palette inspired by theater lights, aged movi
 
 ### Core Palette
 
-| Semantic purpose | Dark mode | Light mode | Intended use |
-| :--- | :--- | :--- | :--- |
-| `background` | `#171312` | `#F8F3EB` | Page background |
-| `foreground` | `#F8F4EF` | `#2A211D` | Primary text |
-| `surface` | `#2A2422` | `#FFFFFF` | Cards, inputs, and navigation |
-| `surface-elevated` | `#342B28` | `#FFFAF4` | Popovers, modals, and raised areas |
-| `surface-muted` | `#453934` | `#EEE5DB` | Selected or subdued surfaces |
-| `border` | `#4B3C35` | `#E4D8CA` | Subtle dividers and input borders |
-| `muted` | `#B8ABA3` | `#776A62` | Secondary text and metadata |
-| `primary` | `#D7A847` | `#B98524` | Primary actions, ratings, and active navigation |
-| `accent` | `#B13E50` | `#96384A` | Watchlist, featured details, and high-attention accents |
-| `taupe` | `#766359` | `#776A62` | Neutral editorial accents and supporting art |
+| Semantic purpose   | Dark mode | Light mode | Intended use                                            |
+| :----------------- | :-------- | :--------- | :------------------------------------------------------ |
+| `background`       | `#171312` | `#F8F3EB`  | Page background                                         |
+| `foreground`       | `#F8F4EF` | `#2A211D`  | Primary text                                            |
+| `surface`          | `#2A2422` | `#FFFFFF`  | Cards, inputs, and navigation                           |
+| `surface-elevated` | `#342B28` | `#FFFAF4`  | Popovers, modals, and raised areas                      |
+| `surface-muted`    | `#453934` | `#EEE5DB`  | Selected or subdued surfaces                            |
+| `border`           | `#4B3C35` | `#E4D8CA`  | Subtle dividers and input borders                       |
+| `muted`            | `#B8ABA3` | `#776A62`  | Secondary text and metadata                             |
+| `primary`          | `#D7A847` | `#B98524`  | Primary actions, ratings, and active navigation         |
+| `accent`           | `#B13E50` | `#96384A`  | Watchlist, featured details, and high-attention accents |
+| `taupe`            | `#766359` | `#776A62`  | Neutral editorial accents and supporting art            |
 
 ### Usage Rules
 
@@ -228,48 +231,48 @@ flowchart TD
 
 Every piece of state in FrameFinder has a clear home based on this decision matrix:
 
-| State Type | Mechanism | Examples in FrameFinder | Why It Belongs Here |
-| :--- | :--- | :--- | :--- |
-| **1. Server State (Remote / Async)** | `TanStack React Query` | Trending list, movie details, cast list, search results | Belongs to TMDB. Asynchronous, needs caching, deduplication, retry, and loading/error handling. |
-| **2. Client State (Global & Persistent)** | `Zustand` (`persist`) | User Favorites, Watchlist, 1–10 Star Ratings, Dark/Light Theme | Belongs to the user. Must survive page refresh and be accessible globally without prop drilling. |
-| **3. URL State (Navigable / Shareable)** | `react-router-dom` (`useSearchParams`, `useParams`) | `?q=interstellar`, `?tab=top-rated`, `/movie/157336` | Single source of truth for view state. Enables bookmarking, sharing, and browser back/forward history. |
-| **4. Local UI State (Ephemeral / Transient)** | React `useState`, `useRef` | Mobile drawer toggle, hover star preview in `RatingStars`, search input buffer | Only the immediate component cares. Disappears when component unmounts. |
+| State Type                                    | Mechanism                                           | Examples in FrameFinder                                                        | Why It Belongs Here                                                                                    |
+| :-------------------------------------------- | :-------------------------------------------------- | :----------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------- |
+| **1. Server State (Remote / Async)**          | `TanStack React Query`                              | Trending list, movie details, cast list, search results                        | Belongs to TMDB. Asynchronous, needs caching, deduplication, retry, and loading/error handling.        |
+| **2. Client State (Global & Persistent)**     | `Zustand` (`persist`)                               | User Favorites, Watchlist, 1–10 Star Ratings, Dark/Light Theme                 | Belongs to the user. Must survive page refresh and be accessible globally without prop drilling.       |
+| **3. URL State (Navigable / Shareable)**      | `react-router-dom` (`useSearchParams`, `useParams`) | `?q=interstellar`, `?tab=top-rated`, `/movie/157336`                           | Single source of truth for view state. Enables bookmarking, sharing, and browser back/forward history. |
+| **4. Local UI State (Ephemeral / Transient)** | React `useState`, `useRef`                          | Mobile drawer toggle, hover star preview in `RatingStars`, search input buffer | Only the immediate component cares. Disappears when component unmounts.                                |
 
 ---
 
 ## Exact File Responsibility Inventory
 
-| File Path | Current Status | Role & Connection in the Architecture |
-| :--- | :--- | :--- |
-| `src/main.jsx` | ✅ Complete | Application root. Wraps `<App />` with `<QueryClientProvider>` and imports `index.css` & `i18n.js`. |
-| `src/app/App.jsx` | ✅ Complete | Defines route tree (`/`, `/search`, `/favorites`, `/library`, `/movie/:id`, `/discover/:category`) and layout wrapper. |
-| `src/components/layout/AppLayout.jsx` | ✅ Complete | Root layout rendering `<Navbar />`, `<main><Outlet /></main>`, and global `<Footer />`. |
-| `src/components/layout/Navbar.jsx` | ✅ Complete | Sticky header with brand, navigation links, search trigger, media switcher (`movie`/`tv`), language switcher, and theme toggle. |
-| `src/components/layout/Footer.jsx` | 🟡 **Planned** | Global footer with TMDB attribution, links, copyright, and language/theme indicators. |
-| `src/index.css` | ✅ Complete | Design system tokens using TailwindCSS v4 `@theme inline` and dark/light mode CSS variables. |
-| `src/app/queryClient.js` | ✅ Complete | Configures React Query cache defaults (`staleTime: 5min`, `gcTime: 30min`, `retry: 1`). |
-| `src/services/tmdb/movieApi.js` | ✅ Active (Expanding) | TMDB API fetch client with Bearer token authentication, error status mapping, and endpoint functions (`fetchTrending`, `fetchTopRated`, `fetchPopular`, `fetchNewReleases`, `fetchByGenre`). |
-| `src/hooks/useMovies.js` | ✅ Active (Expanding) | TanStack Query hooks wrapping `movieApi.js` with localized, isolated query keys (`useTrending`, `useTopRated`, `usePopular`, `useNewReleases`, `useByGenre`). |
-| `src/store/useStore.js` | ✅ Complete | Unified Zustand store with `persist` middleware for theme, `mediaType` (`movie` | `tv`), and user collections. |
-| `src/hooks/useLibrary.js` | 🟡 Planned | Custom hook bridging individual media components to store actions (`toggleFavorite`, `rate`). |
-| `src/hooks/useDebounce.js` | 🟡 Planned | Custom hook debouncing rapid text input by 300ms before firing search queries. |
-| `src/utils/constants.js` | ✅ Complete | Contains image size constants, fallback poster SVG, and `getImageUrl(path, size)`. |
-| `src/utils/helpers.js` | 🟡 Planned | `formatDate`, `formatRuntime`, and `getRatingColorClass` formatting utilities. |
-| `src/components/ui/RatingBadge.jsx` | ✅ Complete | Color-coded score badge (excellent/good/fair/poor) with font-mono score and ARIA label. |
-| `src/components/media/MediaCard.jsx` | ⚠️ Refactoring | Portrait poster card (`aspect-[2/3]`) for horizontal carousels with hover lift, rating badge, title, year, and action buttons. |
-| `src/components/media/MediaCardSkeleton.jsx` | ✅ Complete | Zero-CLS animated skeleton matching portrait `aspect-[2/3]` card layout. |
-| `src/components/media/HeroBanner.jsx` | 🟡 Planned | Cinematic backdrop spotlight showcasing the #1 trending movie/show with title, overview, rating, and quick actions. |
-| `src/components/media/MediaCarousel.jsx` | 🟡 Planned | Horizontal snap-scrolling carousel with left/right chevrons, touch swipe, progressive page fetching, and clickable section header. |
-| `src/components/media/MediaGrid.jsx` | 🟡 Planned | Responsive CSS grid for full-screen category views, search results, and library pages. |
-| `src/components/library/RatingStars.jsx` | 🟡 Planned | Interactive 10-star rating selector with hover preview and clear action. |
-| `src/pages/HomePage.jsx` | ⚠️ In Progress | Home discovery screen with Hero spotlight, 4+ horizontal carousels (Trending, Popular, Top Rated, New Releases), and genre carousels. |
-| `src/pages/CategoryPage.jsx` | 🟡 Planned | Full-screen page for a clicked carousel category or genre with infinite vertical scroll / paginated grid. |
-| `src/pages/SearchPage.jsx` | 🟡 Planned | Live search with URL synchronization, category tabs, and results grid. |
-| `src/pages/MovieDetailsPage.jsx` | 🟡 Planned | Details hub with backdrop, poster, YouTube trailer embed, cast row, and rating selector. |
-| `src/pages/FavoritesPage.jsx` | 🟡 Planned | Dashboard displaying favorited media with removal actions and empty state. |
-| `src/pages/LibraryPage.jsx` | 🟡 Planned | Personal library hub for watchlist and star ratings. |
-| `src/i18n.js` | ✅ Complete | Configures i18next for English (LTR) and Arabic (RTL) with dynamic `dir="rtl"` toggling. |
-| `src/locales/{en,ar}/common.json` | ✅ Complete | Full translation dictionaries for all pages, navigation, and error states. |
+| File Path                                    | Current Status        | Role & Connection in the Architecture                                                                                                                                                        |
+| :------------------------------------------- | :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/main.jsx`                               | ✅ Complete           | Application root. Wraps `<App />` with `<QueryClientProvider>` and imports `index.css` & `i18n.js`.                                                                                          |
+| `src/app/App.jsx`                            | ✅ Complete           | Defines route tree (`/`, `/search`, `/favorites`, `/library`, `/movie/:id`, `/discover/:category`) and layout wrapper.                                                                       |
+| `src/components/layout/AppLayout.jsx`        | ✅ Complete           | Root layout rendering `<Navbar />`, `<main><Outlet /></main>`, and global `<Footer />`.                                                                                                      |
+| `src/components/layout/Navbar.jsx`           | ✅ Complete           | Sticky header with brand, navigation links, search trigger, media switcher (`movie`/`tv`), language switcher, and theme toggle.                                                              |
+| `src/components/layout/Footer.jsx`           | 🟡 **Planned**        | Global footer with TMDB attribution, links, copyright, and language/theme indicators.                                                                                                        |
+| `src/index.css`                              | ✅ Complete           | Design system tokens using TailwindCSS v4 `@theme inline` and dark/light mode CSS variables.                                                                                                 |
+| `src/app/queryClient.js`                     | ✅ Complete           | Configures React Query cache defaults (`staleTime: 5min`, `gcTime: 30min`, `retry: 1`).                                                                                                      |
+| `src/services/tmdb/movieApi.js`              | ✅ Active (Expanding) | TMDB API fetch client with Bearer token authentication, error status mapping, and endpoint functions (`fetchTrending`, `fetchTopRated`, `fetchPopular`, `fetchNewReleases`, `fetchByGenre`). |
+| `src/hooks/useMovies.js`                     | ✅ Active (Expanding) | TanStack Query hooks wrapping `movieApi.js` with localized, isolated query keys (`useTrending`, `useTopRated`, `usePopular`, `useNewReleases`, `useByGenre`).                                |
+| `src/store/useStore.js`                      | ✅ Complete           | Unified Zustand store with `persist` middleware for theme, `mediaType` (`movie`                                                                                                              | `tv`), and user collections. |
+| `src/hooks/useLibrary.js`                    | 🟡 Planned            | Custom hook bridging individual media components to store actions (`toggleFavorite`, `rate`).                                                                                                |
+| `src/hooks/useDebounce.js`                   | 🟡 Planned            | Custom hook debouncing rapid text input by 300ms before firing search queries.                                                                                                               |
+| `src/utils/constants.js`                     | ✅ Complete           | Contains image size constants, fallback poster SVG, and `getImageUrl(path, size)`.                                                                                                           |
+| `src/utils/helpers.js`                       | 🟡 Planned            | `formatDate`, `formatRuntime`, and `getRatingColorClass` formatting utilities.                                                                                                               |
+| `src/components/ui/RatingBadge.jsx`          | ✅ Complete           | Color-coded score badge (excellent/good/fair/poor) with font-mono score and ARIA label.                                                                                                      |
+| `src/components/media/MediaCard.jsx`         | ⚠️ Refactoring        | Portrait poster card (`aspect-[2/3]`) for horizontal carousels with hover lift, rating badge, title, year, and action buttons.                                                               |
+| `src/components/media/MediaCardSkeleton.jsx` | ✅ Complete           | Zero-CLS animated skeleton matching portrait `aspect-[2/3]` card layout.                                                                                                                     |
+| `src/components/media/HeroBanner.jsx`        | 🟡 Planned            | Cinematic backdrop spotlight showcasing the #1 trending movie/show with title, overview, rating, and quick actions.                                                                          |
+| `src/components/media/MediaCarousel.jsx`     | 🟡 Planned            | Horizontal snap-scrolling carousel with left/right chevrons, touch swipe, progressive page fetching, and clickable section header.                                                           |
+| `src/components/media/MediaGrid.jsx`         | 🟡 Planned            | Responsive CSS grid for full-screen category views, search results, and library pages.                                                                                                       |
+| `src/components/library/RatingStars.jsx`     | 🟡 Planned            | Interactive 10-star rating selector with hover preview and clear action.                                                                                                                     |
+| `src/pages/HomePage.jsx`                     | ⚠️ In Progress        | Home discovery screen with Hero spotlight, 4+ horizontal carousels (Trending, Popular, Top Rated, New Releases), and genre carousels.                                                        |
+| `src/pages/CategoryPage.jsx`                 | 🟡 Planned            | Full-screen page for a clicked carousel category or genre with infinite vertical scroll / paginated grid.                                                                                    |
+| `src/pages/SearchPage.jsx`                   | 🟡 Planned            | Live search with URL synchronization, category tabs, and results grid.                                                                                                                       |
+| `src/pages/MovieDetailsPage.jsx`             | 🟡 Planned            | Details hub with backdrop, poster, YouTube trailer embed, cast row, and rating selector.                                                                                                     |
+| `src/pages/FavoritesPage.jsx`                | 🟡 Planned            | Dashboard displaying favorited media with removal actions and empty state.                                                                                                                   |
+| `src/pages/LibraryPage.jsx`                  | 🟡 Planned            | Personal library hub for watchlist and star ratings.                                                                                                                                         |
+| `src/i18n.js`                                | ✅ Complete           | Configures i18next for English (LTR) and Arabic (RTL) with dynamic `dir="rtl"` toggling.                                                                                                     |
+| `src/locales/{en,ar}/common.json`            | ✅ Complete           | Full translation dictionaries for all pages, navigation, and error states.                                                                                                                   |
 
 ---
 
@@ -278,10 +281,12 @@ Every piece of state in FrameFinder has a clear home based on this decision matr
 ## Authentication & Vite Environment Setup
 
 TMDB supports two authentication methods:
-1. **API Read Access Token (v4 Bearer Token)** — *Recommended*: Passed via HTTP `Authorization: Bearer <TOKEN>` header.
+
+1. **API Read Access Token (v4 Bearer Token)** — _Recommended_: Passed via HTTP `Authorization: Bearer <TOKEN>` header.
 2. **API Key (v3)**: Passed via query parameter `?api_key=<KEY>`.
 
 ### Creating Your `.env` File (Project Root):
+
 ```env
 # TMDB API Base URL
 VITE_TMDB_BASE_URL=https://api.themoviedb.org/3
@@ -306,11 +311,13 @@ Full Image URL = https://image.tmdb.org/t/p/{SIZE}/{FILE_PATH}
 ```
 
 ### Optimal Sizes:
+
 - **Posters (`poster_path`)**: `w342` (MovieCard in grids/carousels), `w500` (MovieDetails sidebar poster).
 - **Backdrops (`backdrop_path`)**: `w780` (Tablet/Mobile headers), `w1280` (Desktop Hero & MovieDetails banner).
 - **Cast Profile Photos (`profile_path`)**: `w185` (Circular avatar cards).
 
 ### Helper Utility to Add in `src/utils/constants.js`:
+
 ```javascript
 export const TMDB_IMAGE_SIZES = {
   POSTER_CARD: 'w342',
@@ -319,13 +326,13 @@ export const TMDB_IMAGE_SIZES = {
   BACKDROP_LG: 'w1280',
   PROFILE: 'w185',
   ORIGINAL: 'original',
-};
+}
 
 export const getImageUrl = (path, size = TMDB_IMAGE_SIZES.POSTER_CARD) => {
-  if (!path) return DEFAULT_POSTER;
-  if (path.startsWith('http')) return path; // Already absolute (mock data fallback)
-  return `https://image.tmdb.org/t/p/${size}${path}`;
-};
+  if (!path) return DEFAULT_POSTER
+  if (path.startsWith('http')) return path // Already absolute (mock data fallback)
+  return `https://image.tmdb.org/t/p/${size}${path}`
+}
 ```
 
 ---
@@ -335,6 +342,7 @@ export const getImageUrl = (path, size = TMDB_IMAGE_SIZES.POSTER_CARD) => {
 FrameFinder cleanly separates **Movies** and **TV Shows** rather than mixing them into an unorganized stream. Every service function accepts a media type parameter (`type: 'movie' | 'tv'`).
 
 ### 1. Trending Feed (`GET /trending/{type}/week`)
+
 - **Parameters**: `type = 'movie' | 'tv'`, `time_window = 'week'`
 - **Used by**: `HomePage` (Hero Spotlight & Dedicated Trending Rows)
 - **Movie vs TV Fields**:
@@ -342,82 +350,89 @@ FrameFinder cleanly separates **Movies** and **TV Shows** rather than mixing the
   - TV Shows: `name`, `original_name`, `first_air_date`
 
 ### 2. Top Rated & Popular (`GET /{type}/top_rated`, `GET /{type}/popular`)
+
 - **Parameters**: `type = 'movie' | 'tv'`, `page = 1`
 - **Used by**: `HomePage` Category Carousels ("Popular", "Top Rated")
 
 ### 3. New Releases Feed (`GET /movie/now_playing`, `GET /tv/on_the_air`)
+
 - **Parameters**: `type = 'movie' | 'tv'`, `page = 1`
 - **Used by**: `HomePage` "New Releases" Carousel
 - **Movie endpoint**: `/movie/now_playing`
 - **TV endpoint**: `/tv/on_the_air`
 
 ### 4. Discover by Genre Feed (`GET /discover/{type}`)
+
 - **Parameters**: `type = 'movie' | 'tv'`, `with_genres = {genreId}`, `sort_by = 'popularity.desc'`, `page = 1`
 - **Used by**: `HomePage` Genre Carousels (e.g. Action, Comedy, Sci-Fi, Animation)
 
 ### 5. Media Search (`GET /search/{type}`)
+
 - **Parameters**: `type = 'movie' | 'tv' | 'multi'`, `query = {searchTerm}`
 - **Used by**: `SearchPage` with real-time media type tabs
 
 ### 6. Deep-Dive Details (`GET /{type}/{id}`)
+
 - **Superpower Parameter**: `append_to_response=videos,credits,recommendations`
 - **Used by**: `MovieDetailsPage` / `MediaDetailsPage`
 
 #### Unified Media Card Schema:
+
 ```typescript
 interface MediaItem {
-  id: number;
-  media_type?: 'movie' | 'tv';
-  title?: string;             // Present on movies
-  name?: string;              // Present on TV shows
-  release_date?: string;      // "2024-03-01" (Movies)
-  first_air_date?: string;    // "2024-03-01" (TV Shows)
-  overview: string;
-  poster_path: string | null;
-  backdrop_path: string | null;
-  vote_average: number;
-  vote_count: number;
-  genre_ids: number[];
+  id: number
+  media_type?: 'movie' | 'tv'
+  title?: string // Present on movies
+  name?: string // Present on TV shows
+  release_date?: string // "2024-03-01" (Movies)
+  first_air_date?: string // "2024-03-01" (TV Shows)
+  overview: string
+  poster_path: string | null
+  backdrop_path: string | null
+  vote_average: number
+  vote_count: number
+  genre_ids: number[]
 }
 ```
 
 #### Detailed Media Item Schema:
+
 ```typescript
 interface MediaDetailItem {
-  id: number;
-  title?: string;
-  name?: string;
-  tagline: string;
-  overview: string;
-  poster_path: string | null;
-  backdrop_path: string | null;
-  release_date?: string;
-  first_air_date?: string;
-  runtime?: number;
-  vote_average: number;
-  vote_count: number;
-  genres: Array<{ id: number; name: string }>;
+  id: number
+  title?: string
+  name?: string
+  tagline: string
+  overview: string
+  poster_path: string | null
+  backdrop_path: string | null
+  release_date?: string
+  first_air_date?: string
+  runtime?: number
+  vote_average: number
+  vote_count: number
+  genres: Array<{ id: number; name: string }>
   videos?: {
     results: Array<{
-      key: string;            // YouTube video ID
-      site: string;           // "YouTube"
-      type: string;           // "Trailer", "Teaser"
-      official: boolean;
-    }>;
-  };
+      key: string // YouTube video ID
+      site: string // "YouTube"
+      type: string // "Trailer", "Teaser"
+      official: boolean
+    }>
+  }
   credits?: {
     cast: Array<{
-      id: number;
-      name: string;
-      character: string;
-      profile_path: string | null;
-    }>;
+      id: number
+      name: string
+      character: string
+      profile_path: string | null
+    }>
     crew: Array<{
-      id: number;
-      name: string;
-      job: string;            // "Director"
-    }>;
-  };
+      id: number
+      name: string
+      job: string // "Director"
+    }>
+  }
 }
 ```
 
@@ -438,6 +453,7 @@ To ensure zero developer frustration during offline development or invalid API k
 To guarantee high velocity, clean architecture, and rock-solid performance, FrameFinder is divided into two major development phases:
 
 ### 🌟 Phase 1: v1.0 — Client-First Cinematic Portfolio Application (Current Focus)
+
 - **Discovery Hub**: Hero spotlight banner (#1 trending media) + 4+ horizontal snap-scrolling carousels (Trending, Popular, Top Rated, New Releases) + Genre-curated horizontal carousels.
 - **Search Engine**: Real-time debounced live search with URL synchronization, category quick-tabs, and responsive **vertical grid**.
 - **Full-Screen Category Hubs**: Clicking any carousel title routes to `/discover/:category` or `/genre/:id` with a responsive **vertical grid** and pagination/infinite scroll.
@@ -447,6 +463,13 @@ To guarantee high velocity, clean architecture, and rock-solid performance, Fram
   - **Horizontal snap-scrolling rows for Cast and Crew members**.
   - Interactive actions: Watch trailer modal (auto-unmounting iframe), favorite toggle, want-to-watch toggle, 10-star rating.
   - **Personal Film Journal (Local Reviews & Comments)**: Users can write personal thoughts, notes, and reviews for any title, stored **locally** via Zustand with `localStorage` persistence.
+- **Local Storage Comments System** _(Phase 1 — Offline-First)_:
+  - Users can add personal **comments and reviews** on any movie or TV show detail page.
+  - Comments stored in Zustand with `localStorage` persistence: `comments: { [mediaId]: [{ id, text, createdAt, updatedAt, rating }] }`.
+  - Full CRUD operations: **add**, **edit**, and **delete** comments with instant UI updates.
+  - Each comment supports an optional personal rating alongside the text review.
+  - Fully localized (English LTR & Arabic RTL) with accessible form controls.
+  - Designed with a **migration-ready data schema** so comments can seamlessly sync to MongoDB in Phase 2.
 - **Personal Library & Favorites Dashboards**:
   - Rendered in a clean, accessible **vertical grid**.
   - **Modern Multi-Filter Toolbar**: Filter by media type (`All` / `Movies` / `TV Shows`), filter by genre, sort by date added / rating / release year / alphabetical, and quick in-library text filter.
@@ -454,28 +477,85 @@ To guarantee high velocity, clean architecture, and rock-solid performance, Fram
 - **Zero-CLS Performance**: Fixed `aspect-[2/3]` image containers, DOM containment (`content-visibility: auto`), image lazy loading, TanStack Query caching.
 
 ### 🌐 Phase 2: v2.0 — Full-Stack MERN Community Hub (Future Milestone)
+
 - **Recommended Database**: **MongoDB** (MongoDB Atlas cloud cluster + **Mongoose ODM**).
-  - *Why MongoDB for MERN?* Flexible JSON document model matches TMDB API responses perfectly, enables embedding comments/reviews without complex SQL migrations, and integrates seamlessly with Express and Node.js.
+  - _Why MongoDB for MERN?_ Flexible JSON document model matches TMDB API responses perfectly, enables embedding comments/reviews without complex SQL migrations, and integrates seamlessly with Express and Node.js.
 - **Backend API**: Node.js + Express REST API (or tRPC).
 - **Authentication**: JWT authentication with bcrypt password hashing and secure HTTP-only cookies (Register, Login, Protected Routes).
 - **Hybrid Online/Offline Strategy**:
   - **Client-Side LocalStorage**: Local theme preference, UI states, draft inputs, and query caching for instant rendering.
   - **Cloud MongoDB**: User accounts, synced personal collections across devices, **public reviews & community comments**, and **community like/dislike upvotes** on reviews.
 - **Community Social Feed**: View other users' ratings, read public reviews on movie pages, and like/dislike community comments.
+- **Database-Synced Community Comments & Reviews** _(Phase 2 — Cloud Migration)_:
+  - **Local-to-Cloud Migration**: Phase 1 localStorage comments are synced to MongoDB upon user authentication. Existing local comments are pushed to the cloud as the user's first reviews.
+  - **Public Comment Visibility**: All authenticated users' comments and reviews are visible on the movie/show detail page, creating a community discussion hub.
+  - **Threaded Reply System**: Users can **reply** to other users' comments, creating nested conversation threads. Reply schema: `{ parentCommentId, userId, text, createdAt }`.
+  - **Reactions System**: Users can **react** to comments with emojis or like/dislike upvotes. Supported reactions: 👍 Like, 👎 Dislike, ❤️ Love, 😂 Funny, 😮 Surprised. Each user can only react once per comment (toggle on/off). Reaction counts displayed inline on each comment.
+  - **Comment Moderation**: Edit and delete own comments. Report inappropriate comments. Admin moderation dashboard (future).
+  - **Mongoose Schema Design**:
+    ```javascript
+    // Comment Schema
+    {
+      _id: ObjectId,
+      mediaId: Number,           // TMDB movie/show ID
+      mediaType: 'movie' | 'tv',
+      userId: ObjectId,          // ref: 'User'
+      parentCommentId: ObjectId | null, // null = top-level, ObjectId = reply
+      text: String,
+      rating: Number | null,     // optional 1-10 personal rating
+      reactions: {
+        like: [ObjectId],        // array of userIds
+        dislike: [ObjectId],
+        love: [ObjectId],
+        funny: [ObjectId],
+        surprised: [ObjectId],
+      },
+      createdAt: Date,
+      updatedAt: Date,
+    }
+    ```
+- **🔔 Notification System** _(Phase 2)_:
+  - **Real-Time Notifications**: Users receive notifications when:
+    - Someone **replies** to their comment or review.
+    - Someone **reacts** (like/love/etc.) to their comment.
+    - A movie in their **watchlist** gets a new trailer or release update.
+    - A new **community review** is posted on a movie they've reviewed.
+  - **Notification Delivery Channels**:
+    - **In-App Notification Bell** 🔔: Badge counter on the navbar bell icon, dropdown panel showing recent notifications with read/unread states.
+    - **Real-Time Updates**: Socket.IO or Server-Sent Events (SSE) for instant push notifications without page refresh.
+    - **Email Notifications** _(optional)_: Digest emails for important activity (configurable in user settings).
+  - **Notification Schema**:
+    ```javascript
+    {
+      _id: ObjectId,
+      recipientId: ObjectId,     // user receiving the notification
+      senderId: ObjectId,        // user who triggered it
+      type: 'reply' | 'reaction' | 'watchlist_update' | 'new_review',
+      mediaId: Number,           // related TMDB media ID
+      commentId: ObjectId | null,
+      message: String,           // pre-rendered notification text
+      isRead: Boolean,
+      createdAt: Date,
+    }
+    ```
+  - **User Notification Preferences**: Configurable settings for which notification types to receive (in-app, email, or both). Mute notifications per media title.
 
 ---
 
 ## Sprint 1: Live TMDB API Layer & Fetch Client
 
 ### 🎯 Goal
+
 Build out the live TMDB API client in `src/services/tmdb/movieApi.js` with authentication headers, robust status code error handling, and support for all Discovery feeds (Trending, Top Rated, Popular, New Releases, Genres).
 
 ### 📁 Files to Touch
+
 - `src/services/tmdb/movieApi.js`
 - `src/utils/constants.js`
 - `.env`
 
 ### 📝 Step-by-Step Tasks for User
+
 1. **Create `.env`** at the project root with `VITE_TMDB_BASE_URL` and `VITE_TMDB_ACCESS_TOKEN`.
 2. **Build `apiFetch(endpoint, params)` helper in `movieApi.js`**:
    - Attaches `Authorization: Bearer <TOKEN>` header.
@@ -493,6 +573,7 @@ Build out the live TMDB API client in `src/services/tmdb/movieApi.js` with authe
 4. **Resilient Fallback & Error Handling**: Surface descriptive errors with HTTP statuses without crashing the app.
 
 ### 🧪 Stage Testing & Verification Checklist
+
 - [ ] Open DevTools → Network Tab.
 - [ ] Reload Home page: Verify real requests to `api.themoviedb.org`.
 - [ ] Verify HTTP 200 responses with real titles (`title` for movies, `name` for TV shows) and TMDB poster paths.
@@ -503,27 +584,70 @@ Build out the live TMDB API client in `src/services/tmdb/movieApi.js` with authe
 ## Sprint 2: Server State & TanStack Query Caching
 
 ### 🎯 Goal
+
 Configure TanStack React Query in `src/hooks/useMovies.js` with isolated query keys for Movies, TV Shows, Categories, and Genres, ensuring aggressive caching and deduplication.
 
 ### 📁 Files to Touch
+
 - `src/hooks/useMovies.js`
 - `src/app/queryClient.js`
 
 ### 📝 Step-by-Step Tasks for User
+
 1. **Expanded Media Query Key Factory Pattern**:
    ```javascript
    export const mediaKeys = {
      all: ['media'],
      type: (type) => [...mediaKeys.all, type],
-     trending: (type = 'movie', language = 'en-US') => [...mediaKeys.type(type), 'trending', language],
-     topRated: (type = 'movie', page = 1, language = 'en-US') => [...mediaKeys.type(type), 'top-rated', page, language],
-     popular: (type = 'movie', page = 1, language = 'en-US') => [...mediaKeys.type(type), 'popular', page, language],
-     newReleases: (type = 'movie', page = 1, language = 'en-US') => [...mediaKeys.type(type), 'new-releases', page, language],
-     byGenre: (type = 'movie', genreId, page = 1, language = 'en-US') => [...mediaKeys.type(type), 'genre', genreId, page, language],
-     search: (type = 'movie', query, page = 1, language = 'en-US') => [...mediaKeys.type(type), 'search', query, page, language],
-     detail: (type = 'movie', id, language = 'en-US') => [...mediaKeys.type(type), 'detail', id, language],
-     genres: (type = 'movie', language = 'en-US') => [...mediaKeys.type(type), 'genres', language],
-   };
+     trending: (type = 'movie', language = 'en-US') => [
+       ...mediaKeys.type(type),
+       'trending',
+       language,
+     ],
+     topRated: (type = 'movie', page = 1, language = 'en-US') => [
+       ...mediaKeys.type(type),
+       'top-rated',
+       page,
+       language,
+     ],
+     popular: (type = 'movie', page = 1, language = 'en-US') => [
+       ...mediaKeys.type(type),
+       'popular',
+       page,
+       language,
+     ],
+     newReleases: (type = 'movie', page = 1, language = 'en-US') => [
+       ...mediaKeys.type(type),
+       'new-releases',
+       page,
+       language,
+     ],
+     byGenre: (type = 'movie', genreId, page = 1, language = 'en-US') => [
+       ...mediaKeys.type(type),
+       'genre',
+       genreId,
+       page,
+       language,
+     ],
+     search: (type = 'movie', query, page = 1, language = 'en-US') => [
+       ...mediaKeys.type(type),
+       'search',
+       query,
+       page,
+       language,
+     ],
+     detail: (type = 'movie', id, language = 'en-US') => [
+       ...mediaKeys.type(type),
+       'detail',
+       id,
+       language,
+     ],
+     genres: (type = 'movie', language = 'en-US') => [
+       ...mediaKeys.type(type),
+       'genres',
+       language,
+     ],
+   }
    ```
 2. **Implement Hook Architecture in `useMovies.js`**:
    - `useTrending(type)`: Fetches top trending list for Hero spotlight and Trending carousel.
@@ -538,6 +662,7 @@ Configure TanStack React Query in `src/hooks/useMovies.js` with isolated query k
    - `refetchOnWindowFocus: false`.
 
 ### 🧪 Stage Testing & Verification Checklist
+
 - [ ] Navigate Home → Search → Home: Confirm in Network tab that **no duplicate requests** fire (served from cache).
 - [ ] Switching between 'movie' and 'tv' creates independent cache keys with no data bleed.
 - [ ] Verify `isLoading` shows skeletons only on initial fetch; `isFetching` handles background revalidation.
@@ -547,21 +672,25 @@ Configure TanStack React Query in `src/hooks/useMovies.js` with isolated query k
 ## Sprint 3: Client State Management with Zustand & Persistence
 
 ### 🎯 Goal
+
 Understand and verify persistent client-side state for Favorites, Watchlist, and 1–10 Star Ratings in `src/features/library/librarySlice.js`.
 
 ### 📁 Files to Study & Verify
+
 - `src/features/library/librarySlice.js`
 - `src/features/theme/themeSlice.js`
 - `src/hooks/useLibrary.js`
 
 ### 📝 Step-by-Step Tasks for User
+
 1. **Understand Atomic Selectors**:
-   - *Wrong*: `const { favorites } = useLibraryStore();` (re-renders on any rating change).
-   - *Right*: `const isFav = useLibraryStore((s) => s.isFavorite(movie.id));` (re-renders only when this movie changes).
+   - _Wrong_: `const { favorites } = useLibraryStore();` (re-renders on any rating change).
+   - _Right_: `const isFav = useLibraryStore((s) => s.isFavorite(movie.id));` (re-renders only when this movie changes).
 2. **Verify `useLibrary(movie)` Hook Abstraction**:
    Provides clean boolean flags and toggle handlers (`isFav`, `toggleFavorite`, `isWatchlisted`, `toggleWatchlist`, `rating`, `rate`, `clearRating`).
 
 ### 🧪 Stage Testing & Verification Checklist
+
 - [ ] Favorite a movie → Open DevTools → Application → LocalStorage → Verify `framefinder-library` contains the movie.
 - [ ] Refresh page → Confirm heart icon remains active red.
 - [ ] Rate a movie 8 stars → Confirm `ratings[id].score === 8` in LocalStorage.
@@ -572,15 +701,18 @@ Understand and verify persistent client-side state for Favorites, Watchlist, and
 ## Sprint 4: Atomic UI Design System & Component Library
 
 ### 🎯 Goal
+
 Build, verify, and polish atomic presentation components with strict zero-CLS layout guarantees, micro-animations, and accessibility.
 
 ### 📁 Files to Touch
+
 - `src/components/ui/RatingBadge.jsx`
 - `src/components/media/MediaCardSkeleton.jsx`
 - `src/components/media/MediaCard.jsx`
 - `src/components/library/RatingStars.jsx`
 
 ### 📝 Step-by-Step Tasks for User
+
 1. **`RatingBadge.jsx`**: Threshold-based color coding (`>= 8.0` Emerald green, `>= 6.5` Amber/gold, `>= 5.0` Warm orange, `< 5.0` Crimson red) with font-mono score formatting and ARIA labels.
 2. **`MediaCardSkeleton.jsx`**: Enforces strict `aspect-[2/3]` portrait ratio on poster placeholder to eliminate Cumulative Layout Shift (CLS) during data hydration.
 3. **`MediaCard.jsx` (Optimized Portrait Poster Card)**:
@@ -593,6 +725,7 @@ Build, verify, and polish atomic presentation components with strict zero-CLS la
    - 10 interactive stars with dynamic hover preview and keyboard navigation.
 
 ### 🧪 Stage Testing & Verification Checklist
+
 - [ ] Poster cards hold exact `aspect-[2/3]` dimensions before and after images load (zero layout jump).
 - [ ] Hover over star 8 in `RatingStars`: Verify stars 1 through 8 illuminate gold.
 - [ ] Click "Clear": Verify rating resets to 0.
@@ -603,9 +736,11 @@ Build, verify, and polish atomic presentation components with strict zero-CLS la
 ## Sprint 5: Home Page & Cinematic Discovery Experience (Horizontal Carousels & Hero)
 
 ### 🎯 Goal
+
 Build the flagship Discovery experience on `src/pages/HomePage.jsx` featuring a cinematic Hero Spotlight (#1 trending item), 4+ primary horizontal scrolling carousels, genre-based carousels, clickable category headers leading to full-screen views, progressive horizontal page fetching, and a global footer in `AppLayout.jsx`.
 
 ### 📁 Files to Touch
+
 - `src/pages/HomePage.jsx`
 - `src/components/media/HeroBanner.jsx`
 - `src/components/media/MediaCarousel.jsx`
@@ -613,6 +748,7 @@ Build the flagship Discovery experience on `src/pages/HomePage.jsx` featuring a 
 - `src/components/layout/AppLayout.jsx`
 
 ### 📝 Step-by-Step Tasks for User
+
 1. **Dynamic Hero Spotlight (`HeroBanner.jsx`)**:
    - Fetches the #1 trending media item (`trending.data?.results?.[0]`).
    - High-resolution backdrop (`w1280` or `original`) with dark radial gradient scrim overlay (`bg-gradient-to-t from-background via-background/60 to-transparent`).
@@ -645,6 +781,7 @@ Build the flagship Discovery experience on `src/pages/HomePage.jsx` featuring a 
    - **Memoization**: `React.memo(MediaCard)` to prevent entire carousel re-renders on local bookmark/favorite updates.
 
 ### 🧪 Stage Testing & Verification Checklist
+
 - [ ] Home page renders Hero banner with #1 trending media and dynamic backdrop.
 - [ ] All 4 primary carousels (Trending, Popular, Top Rated, New Releases) render live TMDB data.
 - [ ] Genre carousels render accurate titles filtered by genre.
@@ -659,15 +796,18 @@ Build the flagship Discovery experience on `src/pages/HomePage.jsx` featuring a 
 ## Sprint 6: Full-Screen Category Hubs & Real-Time Debounced Search
 
 ### 🎯 Goal
+
 Build the full-screen category/genre explore views (`src/pages/CategoryPage.jsx`) with infinite vertical scroll / paginated grid, and implement debounced live search with URL synchronization on `src/pages/SearchPage.jsx`.
 
 ### 📁 Files to Touch
+
 - `src/pages/CategoryPage.jsx`
 - `src/pages/SearchPage.jsx`
 - `src/hooks/useDebounce.js`
 - `src/components/media/MediaGrid.jsx`
 
 ### 📝 Step-by-Step Tasks for User
+
 1. **Full-Screen Category / Genre Page (`CategoryPage.jsx`)**:
    - Handles routes like `/discover/:category` (`trending`, `popular`, `top-rated`, `new-releases`) and `/genre/:id`.
    - Renders a responsive multi-column grid (`MediaGrid.jsx`).
@@ -681,6 +821,7 @@ Build the full-screen category/genre explore views (`src/pages/CategoryPage.jsx`
    - When search returns 0 items, display `EmptyState` with a helpful message.
 
 ### 🧪 Stage Testing & Verification Checklist
+
 - [ ] Type rapidly: Confirm in Network tab that only **1 API request** fires after typing stops.
 - [ ] Direct URL link: Open `/search?q=Matrix` in a new tab → search input is pre-populated and results load.
 - [ ] Search nonsense string: Confirm clean empty state message appears.
@@ -690,9 +831,11 @@ Build the full-screen category/genre explore views (`src/pages/CategoryPage.jsx`
 ## Sprint 7: Movie Details Page, Horizontal Cast/Crew Hub & Local Film Journal
 
 ### 🎯 Goal
+
 Build the immersive full-page `/movie/:id` (and `/tv/:id`) details hub with cinematic high-res backdrop, extensive TMDB statistics, horizontal snap-scrolling cast and crew rows, YouTube trailer modal, and a local personal film journal (comments/reviews) stored via Zustand.
 
 ### 📁 Files to Touch
+
 - `src/pages/MovieDetailsPage.jsx`
 - `src/components/media/CastCrewRow.jsx`
 - `src/components/media/VideoModal.jsx`
@@ -701,6 +844,7 @@ Build the immersive full-page `/movie/:id` (and `/tv/:id`) details hub with cine
 - `src/store/useStore.js` (add personal comments/reviews slice)
 
 ### 📝 Step-by-Step Tasks for User
+
 1. **Full-Page Cinematic Scrim & Extensive TMDB Data**:
    - High-resolution backdrop (`w1280` or `original`) with dark radial overlay.
    - Comprehensive metadata: tagline, overview synopsis, release date, status, runtime (`2h 49m`), financial stats (Budget & Revenue formatted to USD `$165,000,000`), production companies, and genre pills.
@@ -718,6 +862,7 @@ Build the immersive full-page `/movie/:id` (and `/tv/:id`) details hub with cine
    - Edit and delete actions with instant UI updates.
 
 ### 🧪 Stage Testing & Verification Checklist
+
 - [ ] Navigate to `/movie/157336` (Interstellar): Confirm backdrop, budget, revenue, runtime, and all TMDB metadata load accurately.
 - [ ] Cast and Crew render in horizontal snap-scrolling rows with smooth scrolling and responsive card widths.
 - [ ] Open trailer modal: Video loads. Close modal: Audio halts instantly.
@@ -729,9 +874,11 @@ Build the immersive full-page `/movie/:id` (and `/tv/:id`) details hub with cine
 ## Sprint 8: Personal Library & Favorites Dashboards (Vertical Grid with Multi-Filters)
 
 ### 🎯 Goal
+
 Build dedicated personal collection dashboards rendered in a responsive **vertical grid** with **modern accessible multi-filter toolbars** (genre, media type, sorting, and in-collection search) and bi-directional localization.
 
 ### 📁 Files to Touch
+
 - `src/pages/FavoritesPage.jsx`
 - `src/pages/LibraryPage.jsx`
 - `src/components/library/CollectionFilterToolbar.jsx`
@@ -739,6 +886,7 @@ Build dedicated personal collection dashboards rendered in a responsive **vertic
 - `src/components/library/EmptyState.jsx`
 
 ### 📝 Step-by-Step Tasks for User
+
 1. **Vertical Grid Layout (`MediaGrid.jsx`)**:
    - Renders saved favorites, watchlist items, and rated items in an accessible responsive multi-column vertical grid (`grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6`).
 2. **Modern Multi-Filter Toolbar (`CollectionFilterToolbar.jsx`)**:
@@ -758,6 +906,7 @@ Build dedicated personal collection dashboards rendered in a responsive **vertic
    - Displays helpful illustration, localized guidance, and "Explore Movies" CTA button when a filtered collection returns zero items.
 
 ### 🧪 Stage Testing & Verification Checklist
+
 - [ ] Add multiple movies and TV shows across different genres to Favorites and Watchlist.
 - [ ] Filter by "TV Shows": Only series appear in vertical grid.
 - [ ] Sort by "Rating (Highest)": Cards sort in descending order of vote average / personal score.
@@ -769,15 +918,18 @@ Build dedicated personal collection dashboards rendered in a responsive **vertic
 ## Sprint 9: Bi-Directional Internationalization (i18n) & RTL Layout
 
 ### 🎯 Goal
+
 Verify complete English (LTR) and Arabic (RTL) localization and layout symmetry.
 
 ### 📁 Files to Touch
+
 - `src/i18n.js`
 - `src/locales/en/common.json`
 - `src/locales/ar/common.json`
 - `src/components/layout/Navbar.jsx`
 
 ### 📝 Step-by-Step Tasks for User
+
 1. **Audit All Strings**: Ensure every user-facing label uses `const { t } = useTranslation();`.
 2. **RTL Direction Synchronization**:
    `i18n.on("languageChanged", (lng) => { document.documentElement.dir = lng === "ar" ? "rtl" : "ltr"; })`.
@@ -785,6 +937,7 @@ Verify complete English (LTR) and Arabic (RTL) localization and layout symmetry.
    Replace physical CSS (`ml-`, `mr-`, `text-left`, `text-right`) with logical CSS (`ms-`, `me-`, `text-start`, `text-end`).
 
 ### 🧪 Stage Testing & Verification Checklist
+
 - [ ] Toggle Language (EN <-> AR) in Navbar.
 - [ ] In Arabic: Document sets `dir="rtl"`, text aligns right, navbar flips symmetrically.
 - [ ] Refresh page in Arabic: Language preference persists from `localStorage`.
@@ -794,13 +947,16 @@ Verify complete English (LTR) and Arabic (RTL) localization and layout symmetry.
 ## Sprint 10: Performance, Testing Suite, SEO & Deployment
 
 ### 🎯 Goal
+
 Audit performance, run unit tests, create a production build, and deploy to Vercel/Netlify.
 
 ### 📁 Files to Touch
+
 - `vite.config.js`
 - `package.json`
 
 ### 📝 Step-by-Step Tasks for User
+
 1. **Setup Vitest & React Testing Library**: Add unit tests for `helpers.js`, `useStore.js`, and `useDebounce.js`.
 2. **Carousel & Image Performance Audit**:
    - Verify 60fps smooth scrolling across all horizontal carousels without jank.
@@ -813,6 +969,7 @@ Audit performance, run unit tests, create a production build, and deploy to Verc
    - Add SPA redirect rule (`vercel.json` or `public/_redirects`) so direct links to `/movie/:id` and `/discover/:category` don't 404.
 
 ### 🧪 Stage Testing & Verification Checklist
+
 - [ ] `npm run build` finishes with 0 errors.
 - [ ] All Vitest unit tests pass: `npm run test`.
 - [ ] Lighthouse score: 90+ across Performance, Accessibility, and Best Practices.
@@ -826,147 +983,156 @@ Audit performance, run unit tests, create a production build, and deploy to Verc
 ## Vitest Unit Test Recipes (Helpers, Hooks, Zustand)
 
 To set up automated testing:
+
 ```bash
 npm install -D vitest @testing-library/react @testing-library/jest-dom jsdom
 ```
 
 ### Test 1: Helper Utilities (`src/utils/__tests__/helpers.test.js`)
+
 ```javascript
-import { describe, it, expect } from "vitest";
-import { formatDate, formatRuntime, getRatingColorClass } from "../helpers.js";
+import { describe, it, expect } from 'vitest'
+import { formatDate, formatRuntime, getRatingColorClass } from '../helpers.js'
 
-describe("formatRuntime", () => {
-  it("converts minutes into hours and minutes string", () => {
-    expect(formatRuntime(148)).toBe("2h 28m");
-    expect(formatRuntime(60)).toBe("1h 0m");
-    expect(formatRuntime(45)).toBe("45m");
-  });
-  it("handles null, undefined, and zero safely", () => {
-    expect(formatRuntime(null)).toBe("N/A");
-    expect(formatRuntime(0)).toBe("N/A");
-  });
-});
+describe('formatRuntime', () => {
+  it('converts minutes into hours and minutes string', () => {
+    expect(formatRuntime(148)).toBe('2h 28m')
+    expect(formatRuntime(60)).toBe('1h 0m')
+    expect(formatRuntime(45)).toBe('45m')
+  })
+  it('handles null, undefined, and zero safely', () => {
+    expect(formatRuntime(null)).toBe('N/A')
+    expect(formatRuntime(0)).toBe('N/A')
+  })
+})
 
-describe("formatDate", () => {
-  it("extracts four digit release year from ISO string", () => {
-    expect(formatDate("2014-11-05")).toBe("2014");
-  });
-  it("handles missing date gracefully", () => {
-    expect(formatDate(null)).toBe("N/A");
-  });
-});
+describe('formatDate', () => {
+  it('extracts four digit release year from ISO string', () => {
+    expect(formatDate('2014-11-05')).toBe('2014')
+  })
+  it('handles missing date gracefully', () => {
+    expect(formatDate(null)).toBe('N/A')
+  })
+})
 
-describe("getRatingColorClass", () => {
-  it("returns correct color classes across thresholds", () => {
-    expect(getRatingColorClass(9)).toContain("success");
-    expect(getRatingColorClass(7)).toContain("star");
-    expect(getRatingColorClass(5)).toContain("primary");
-    expect(getRatingColorClass(3)).toContain("danger");
-  });
-});
+describe('getRatingColorClass', () => {
+  it('returns correct color classes across thresholds', () => {
+    expect(getRatingColorClass(9)).toContain('success')
+    expect(getRatingColorClass(7)).toContain('star')
+    expect(getRatingColorClass(5)).toContain('primary')
+    expect(getRatingColorClass(3)).toContain('danger')
+  })
+})
 ```
 
 ### Test 2: Zustand Library Slice (`src/features/library/__tests__/librarySlice.test.js`)
+
 ```javascript
-import { describe, it, expect, beforeEach } from "vitest";
-import useLibraryStore from "../librarySlice.js";
+import { describe, it, expect, beforeEach } from 'vitest'
+import useLibraryStore from '../librarySlice.js'
 
-const sampleMovie = { id: 550, title: "Fight Club", poster_path: "/abc.jpg" };
+const sampleMovie = { id: 550, title: 'Fight Club', poster_path: '/abc.jpg' }
 
-describe("useLibraryStore", () => {
+describe('useLibraryStore', () => {
   beforeEach(() => {
-    useLibraryStore.setState({ favorites: [], watchlist: [], ratings: {} });
-  });
+    useLibraryStore.setState({ favorites: [], watchlist: [], ratings: {} })
+  })
 
-  it("adds and removes favorites without duplicates", () => {
-    useLibraryStore.getState().addFavorite(sampleMovie);
-    expect(useLibraryStore.getState().isFavorite(550)).toBe(true);
+  it('adds and removes favorites without duplicates', () => {
+    useLibraryStore.getState().addFavorite(sampleMovie)
+    expect(useLibraryStore.getState().isFavorite(550)).toBe(true)
 
     // Prevent duplicate
-    useLibraryStore.getState().addFavorite(sampleMovie);
-    expect(useLibraryStore.getState().favorites.length).toBe(1);
+    useLibraryStore.getState().addFavorite(sampleMovie)
+    expect(useLibraryStore.getState().favorites.length).toBe(1)
 
-    useLibraryStore.getState().removeFavorite(550);
-    expect(useLibraryStore.getState().isFavorite(550)).toBe(false);
-  });
+    useLibraryStore.getState().removeFavorite(550)
+    expect(useLibraryStore.getState().isFavorite(550)).toBe(false)
+  })
 
-  it("records and updates ratings", () => {
-    useLibraryStore.getState().setRating(sampleMovie, 8);
-    expect(useLibraryStore.getState().getRating(550)).toBe(8);
+  it('records and updates ratings', () => {
+    useLibraryStore.getState().setRating(sampleMovie, 8)
+    expect(useLibraryStore.getState().getRating(550)).toBe(8)
 
-    useLibraryStore.getState().setRating(sampleMovie, 10);
-    expect(useLibraryStore.getState().getRating(550)).toBe(10);
+    useLibraryStore.getState().setRating(sampleMovie, 10)
+    expect(useLibraryStore.getState().getRating(550)).toBe(10)
 
-    useLibraryStore.getState().removeRating(550);
-    expect(useLibraryStore.getState().getRating(550)).toBe(0);
-  });
-});
+    useLibraryStore.getState().removeRating(550)
+    expect(useLibraryStore.getState().getRating(550)).toBe(0)
+  })
+})
 ```
 
 ### Test 3: Debounce Hook (`src/hooks/__tests__/useDebounce.test.js`)
-```javascript
-import { renderHook, act } from "@testing-library/react";
-import { describe, it, expect, vi } from "vitest";
-import useDebounce from "../useDebounce.js";
 
-describe("useDebounce", () => {
-  it("delays updating the debounced value until specified timeout", () => {
-    vi.useFakeTimers();
+```javascript
+import { renderHook, act } from '@testing-library/react'
+import { describe, it, expect, vi } from 'vitest'
+import useDebounce from '../useDebounce.js'
+
+describe('useDebounce', () => {
+  it('delays updating the debounced value until specified timeout', () => {
+    vi.useFakeTimers()
     const { result, rerender } = renderHook(
       ({ value }) => useDebounce(value, 300),
-      { initialProps: { value: "batman" } }
-    );
+      { initialProps: { value: 'batman' } }
+    )
 
-    expect(result.current).toBe("batman");
+    expect(result.current).toBe('batman')
 
-    rerender({ value: "batman begins" });
-    expect(result.current).toBe("batman"); // Still old value
+    rerender({ value: 'batman begins' })
+    expect(result.current).toBe('batman') // Still old value
 
     act(() => {
-      vi.advanceTimersByTime(300);
-    });
+      vi.advanceTimersByTime(300)
+    })
 
-    expect(result.current).toBe("batman begins"); // Updated
-    vi.useRealTimers();
-  });
-});
+    expect(result.current).toBe('batman begins') // Updated
+    vi.useRealTimers()
+  })
+})
 ```
 
 ---
 
 ## Manual QA & Edge-Case Verification Matrix
 
-| Area | Edge-Case Scenario | Expected Safe Behavior | Pass? |
-| :--- | :--- | :--- | :--- |
-| **Network** | Network disconnects while browsing | App renders cached data or clean `ErrorMessage` with retry button | [ ] |
-| **Images** | TMDB movie has `poster_path: null` | `MovieCard` gracefully renders fallback SVG without broken image icon | [ ] |
-| **Search** | User types special characters `!@#$%^&*()` | Query is URI encoded; TMDB returns 0 results cleanly without errors | [ ] |
-| **Media** | User closes YouTube trailer modal | Modal unmounts immediately and video audio halts instantly | [ ] |
-| **Navigation**| User refreshes `/movie/157336` directly in browser | Page hydrates directly and loads movie details without 404 | [ ] |
-| **RTL** | User switches language to Arabic | All cards, carousels, text, and drawer flip horizontally | [ ] |
+| Area           | Edge-Case Scenario                                 | Expected Safe Behavior                                                | Pass? |
+| :------------- | :------------------------------------------------- | :-------------------------------------------------------------------- | :---- |
+| **Network**    | Network disconnects while browsing                 | App renders cached data or clean `ErrorMessage` with retry button     | [ ]   |
+| **Images**     | TMDB movie has `poster_path: null`                 | `MovieCard` gracefully renders fallback SVG without broken image icon | [ ]   |
+| **Search**     | User types special characters `!@#$%^&*()`         | Query is URI encoded; TMDB returns 0 results cleanly without errors   | [ ]   |
+| **Media**      | User closes YouTube trailer modal                  | Modal unmounts immediately and video audio halts instantly            | [ ]   |
+| **Navigation** | User refreshes `/movie/157336` directly in browser | Page hydrates directly and loads movie details without 404            | [ ]   |
+| **RTL**        | User switches language to Arabic                   | All cards, carousels, text, and drawer flip horizontally              | [ ]   |
 
 ---
 
 # 6. Anti-Patterns & Common Gotchas Playbook
 
 ### ❌ Anti-Pattern 1: Storing TMDB API Responses in Zustand
+
 - **Wrong**: Creating a `movieStore.js` with `trendingMovies: []` and manual loading booleans.
 - **Why**: You lose automatic caching, deduplication, background re-fetching, and garbage collection.
 - **Right**: Use **TanStack React Query** for server data; use **Zustand** only for user-created data (favorites, ratings, theme).
 
 ### ❌ Anti-Pattern 2: Hardcoded Physical CSS Directions
+
 - **Wrong**: Using `ml-4` or `text-left` breaks Arabic RTL layout.
 - **Right**: Use Tailwind CSS **logical properties**: `ms-4` (margin start), `me-4` (margin end), `text-start`, `text-end`.
 
 ### ❌ Anti-Pattern 3: Hiding Trailer Modal with CSS instead of Unmounting
+
 - **Wrong**: Using `display: none` hides the iframe, but the YouTube video continues playing audio in the background.
 - **Right**: Conditionally render the modal `{isOpen && <VideoModal />}` so the iframe DOM element unmounts on close.
 
 ### ❌ Anti-Pattern 4: Subscribing to the Entire Zustand Store
+
 - **Wrong**: `const store = useStore();` causes your component to re-render on ANY change in the store.
 - **Right**: Use atomic selectors: `const isFav = useStore((s) => s.isFavorite(movieId));`.
 
 ### ❌ Anti-Pattern 5: Mixing Horizontal and Vertical Scrolling Without Containment
+
 - **Wrong**: Putting an endless vertical stream on the Home Discovery page that prevents users from reaching the footer or smoothly exploring categorized content.
 - **Right**: Structure the Home/Discover experience around a top **Hero Spotlight** and **Horizontal Snap-Scrolling Carousels** (Trending, Popular, Top Rated, New Releases, Genres), keeping vertical infinite scrolling strictly inside dedicated full-screen Category / Search pages (`/discover/:category`, `/search`).
 
@@ -989,17 +1155,23 @@ When discussing **FrameFinder** in technical interviews or describing it on your
 Copy and paste these prompts to your AI companion as you progress:
 
 ### 💬 Sprint 1 Starter Prompt:
-> *"I am building FrameFinder using this Master Architecture Blueprint. You are my Senior React Architect and Socratic Mentor. Let's begin with **Sprint 1: Live TMDB API Layer & Fetch Client**. Please explain the goal of Task 1, teach me how `apiFetch` should handle authentication headers and errors, and ask me to write the first function. Guide me step by step and do not write the full code for me!"*
+
+> _"I am building FrameFinder using this Master Architecture Blueprint. You are my Senior React Architect and Socratic Mentor. Let's begin with **Sprint 1: Live TMDB API Layer & Fetch Client**. Please explain the goal of Task 1, teach me how `apiFetch` should handle authentication headers and errors, and ask me to write the first function. Guide me step by step and do not write the full code for me!"_
 
 ### 💬 Code Review Prompt (When You Finish a Task):
-> *"Here is my implementation for **[Insert File Name, e.g. src/features/movies/movieApi.js]**:*
+
+> _"Here is my implementation for **[Insert File Name, e.g. src/features/movies/movieApi.js]**:_
+>
 > ```javascript
 > // [Paste your code here]
 > ```
-> *Please review my code for: (1) Correctness and edge cases, (2) Error handling, (3) Clean separation of concerns according to our blueprint. Give me feedback and hints on any areas for improvement."*
+>
+> _Please review my code for: (1) Correctness and edge cases, (2) Error handling, (3) Clean separation of concerns according to our blueprint. Give me feedback and hints on any areas for improvement."_
 
 ### 💬 Stage Verification Prompt (End of Each Sprint):
-> *"I have completed **[Insert Sprint Number]**. Let's review the Stage Testing & Verification Checklist together. How should we test and verify this milestone before moving forward?"*
+
+> _"I have completed **[Insert Sprint Number]**. Let's review the Stage Testing & Verification Checklist together. How should we test and verify this milestone before moving forward?"_
 
 ---
-*FrameFinder Master Blueprint — Built with React 19, Vite, TailwindCSS v4, TanStack Query & TMDB API.*
+
+_FrameFinder Master Blueprint — Built with React 19, Vite, TailwindCSS v4, TanStack Query & TMDB API._
